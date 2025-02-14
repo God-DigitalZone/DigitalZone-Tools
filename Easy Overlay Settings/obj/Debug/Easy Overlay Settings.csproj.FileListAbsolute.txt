@@ -1,0 +1,10 @@
+C:\Users\Omyga\source\repos\Easy Overlay Settings\obj\Debug\Easy Overlay Settings.csproj.AssemblyReference.cache
+C:\Users\Omyga\source\repos\Easy Overlay Settings\obj\Debug\Easy_Overlay_Settings.Properties.Resources.resources
+C:\Users\Omyga\source\repos\Easy Overlay Settings\obj\Debug\Easy Overlay Settings.csproj.GenerateResource.cache
+C:\Users\Omyga\source\repos\Easy Overlay Settings\obj\Debug\Easy Overlay Settings.csproj.CoreCompileInputs.cache
+C:\Users\Omyga\source\repos\Easy Overlay Settings\bin\Debug\Easy Overlay Settings.exe.config
+C:\Users\Omyga\source\repos\Easy Overlay Settings\bin\Debug\Easy Overlay Settings.exe
+C:\Users\Omyga\source\repos\Easy Overlay Settings\bin\Debug\Easy Overlay Settings.pdb
+C:\Users\Omyga\source\repos\Easy Overlay Settings\obj\Debug\Easy Overlay Settings.exe
+C:\Users\Omyga\source\repos\Easy Overlay Settings\obj\Debug\Easy Overlay Settings.pdb
+C:\Users\Omyga\source\repos\Easy Overlay Settings\bin\Debug\Image.ico
