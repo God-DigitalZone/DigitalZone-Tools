@@ -8,3 +8,4 @@ C:\Users\Omyga\source\repos\Easy Overlay Settings\bin\Debug\Easy Overlay Setting
 C:\Users\Omyga\source\repos\Easy Overlay Settings\obj\Debug\Easy Overlay Settings.exe
 C:\Users\Omyga\source\repos\Easy Overlay Settings\obj\Debug\Easy Overlay Settings.pdb
 C:\Users\Omyga\source\repos\Easy Overlay Settings\bin\Debug\Image.ico
+C:\Users\Omyga\source\repos\Easy Overlay Settings\bin\Debug\bin\Debug\github.png

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace Overlay_Disabler
+namespace Easy_Overlay_Settings
 {
     static class Program
     {

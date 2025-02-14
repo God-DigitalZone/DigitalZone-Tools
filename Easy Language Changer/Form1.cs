@@ -154,6 +154,29 @@ namespace Easy_Language_Changer
                 AutoSize = true
             };
 
+            // Aggiungi un'icona GitHub cliccabile
+            var githubIcon = new PictureBox
+            {
+                Image = Properties.Resources.github, // Utilizza l'immagine incorporata
+                Width = 32,
+                Height = 32,
+                Left = (this.ClientSize.Width - 32) / 2,
+                Top = 300,
+                Cursor = Cursors.Hand
+            };
+            githubIcon.Click += (sender, e) => System.Diagnostics.Process.Start("https://github.com/God-DigitalZone/Easy_Language_Changer-Easy_Overlay_Settings");
+
+            // Aggiungi un'etichetta per "GitHub"
+            var githubLabel = new Label
+            {
+                Text = "GitHub",
+                Font = new Font("Arial", 10, FontStyle.Bold),
+                ForeColor = Color.White,
+                AutoSize = true,
+                Left = (this.ClientSize.Width - 50) / 2,
+                Top = 340
+            };
+
             // Centrare gli elementi
             label.Left = (this.ClientSize.Width - label.Width) / 2;
             comboBox.Left = (this.ClientSize.Width - comboBox.Width) / 2;
@@ -173,15 +196,20 @@ namespace Easy_Language_Changer
             this.Controls.Add(comboBox);
             this.Controls.Add(applyButton);
             this.Controls.Add(messageLabel);
-            this.Controls.Add(poweredByLabel); // Aggiungi la scritta "Powered by DigitalZone"
+            this.Controls.Add(poweredByLabel);
+            this.Controls.Add(githubIcon);
+            this.Controls.Add(githubLabel);
 
             // Centrare gli elementi al ridimensionamento
-            this.Resize += (sender, e) => {
+            this.Resize += (sender, e) =>
+            {
                 label.Left = (this.ClientSize.Width - label.Width) / 2;
                 comboBox.Left = (this.ClientSize.Width - comboBox.Width) / 2;
                 applyButton.Left = (this.ClientSize.Width - applyButton.Width) / 2;
                 messageLabel.Left = (this.ClientSize.Width - messageLabel.Width) / 2;
-                poweredByLabel.Left = (this.ClientSize.Width - poweredByLabel.Width) / 2; // Centra la scritta "Powered by DigitalZone"
+                poweredByLabel.Left = (this.ClientSize.Width - poweredByLabel.Width) / 2;
+                githubIcon.Left = (this.ClientSize.Width - githubIcon.Width) / 2;
+                githubLabel.Left = (this.ClientSize.Width - githubLabel.Width) / 2;
             };
         }
     }

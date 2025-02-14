@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
 
-namespace Overlay_Disabler
+namespace Easy_Overlay_Settings
 {
     public partial class Form1 : Form
     {
@@ -12,6 +13,8 @@ namespace Overlay_Disabler
         private CheckBox overlayCheckBox;
         private Label messageLabel;
         private Label poweredByLabel;
+        private PictureBox githubPictureBox;
+        private Label githubLabel;
 
         public Form1()
         {
@@ -75,6 +78,8 @@ namespace Overlay_Disabler
             // Centra il messaggio
             messageLabel.Left = (this.ClientSize.Width - messageLabel.Width) / 2;
             poweredByLabel.Left = (this.ClientSize.Width - poweredByLabel.Width) / 2;
+            githubPictureBox.Left = (this.ClientSize.Width - githubPictureBox.Width) / 2;
+            githubLabel.Left = (this.ClientSize.Width - githubLabel.Width) / 2;
         }
 
         private void LoadOverlayConfig()
@@ -111,6 +116,23 @@ namespace Overlay_Disabler
                 AutoSize = true
             };
 
+            // Carica l'immagine di GitHub dalle risorse incorporate
+            githubPictureBox = new PictureBox
+            {
+                Image = Easy_Overlay_Settings.Properties.Resources.github, // Usa il nome del namespace completo
+                SizeMode = PictureBoxSizeMode.AutoSize,
+                Cursor = Cursors.Hand // Imposta il cursore a mano quando passa sopra l'icona
+            };
+            githubPictureBox.Click += (sender, e) => Process.Start("https://github.com/God-DigitalZone/Easy_Language_Changer-Easy_Overlay_Settings");
+
+            githubLabel = new Label
+            {
+                Text = "GitHub",
+                Font = new Font("Arial", 14, FontStyle.Bold), // Stesso font di "Powered by DigitalZone"
+                ForeColor = Color.White,
+                AutoSize = true
+            };
+
             // Centrare gli elementi
             overlayCheckBox.Left = (this.ClientSize.Width - overlayCheckBox.Width) / 2;
             messageLabel.Left = (this.ClientSize.Width - messageLabel.Width) / 2;
@@ -118,20 +140,35 @@ namespace Overlay_Disabler
 
             overlayCheckBox.Top = 50;
             messageLabel.Top = 100;
-            poweredByLabel.Top = 120; // Posiziona la scritta sotto il messaggio
+            poweredByLabel.Top = 120;
+
+            // Posiziona l'icona di GitHub e l'etichetta sotto il "Powered by DigitalZone"
+            githubPictureBox.Top = poweredByLabel.Bottom + 10;
+            githubPictureBox.Left = (this.ClientSize.Width - githubPictureBox.Width) / 2;
+            githubLabel.Top = githubPictureBox.Bottom + 5;
+            githubLabel.Left = (this.ClientSize.Width - githubLabel.Width) / 2;
 
             overlayCheckBox.CheckedChanged += (sender, e) => UpdateOverlayConfig();
 
             this.Controls.Add(overlayCheckBox);
             this.Controls.Add(messageLabel);
-            this.Controls.Add(poweredByLabel); // Aggiungi la scritta "Powered by DigitalZone"
+            this.Controls.Add(poweredByLabel);
+            this.Controls.Add(githubPictureBox); // Aggiungi l'icona di GitHub
+            this.Controls.Add(githubLabel); // Aggiungi l'etichetta di GitHub
 
             // Centrare gli elementi al ridimensionamento
             this.Resize += (sender, e) => {
                 overlayCheckBox.Left = (this.ClientSize.Width - overlayCheckBox.Width) / 2;
                 messageLabel.Left = (this.ClientSize.Width - messageLabel.Width) / 2;
-                poweredByLabel.Left = (this.ClientSize.Width - poweredByLabel.Width) / 2; // Centra la scritta "Powered by DigitalZone"
+                poweredByLabel.Left = (this.ClientSize.Width - poweredByLabel.Width) / 2;
+                githubPictureBox.Left = (this.ClientSize.Width - githubPictureBox.Width) / 2;
+                githubLabel.Left = (this.ClientSize.Width - githubLabel.Width) / 2;
             };
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            // Aggiungi il codice che deve essere eseguito quando il form viene caricato
         }
     }
 }
