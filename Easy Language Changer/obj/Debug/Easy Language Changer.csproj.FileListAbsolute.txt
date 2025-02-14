@@ -1,0 +1,9 @@
+C:\Users\Omyga\source\repos\Easy Language Changer\obj\Debug\Easy Language Changer.csproj.AssemblyReference.cache
+C:\Users\Omyga\source\repos\Easy Language Changer\obj\Debug\Easy_Language_Changer.Properties.Resources.resources
+C:\Users\Omyga\source\repos\Easy Language Changer\obj\Debug\Easy Language Changer.csproj.GenerateResource.cache
+C:\Users\Omyga\source\repos\Easy Language Changer\obj\Debug\Easy Language Changer.csproj.CoreCompileInputs.cache
+C:\Users\Omyga\source\repos\Easy Language Changer\bin\Debug\Easy Language Changer.exe.config
+C:\Users\Omyga\source\repos\Easy Language Changer\bin\Debug\Easy Language Changer.exe
+C:\Users\Omyga\source\repos\Easy Language Changer\bin\Debug\Easy Language Changer.pdb
+C:\Users\Omyga\source\repos\Easy Language Changer\obj\Debug\Easy Language Changer.exe
+C:\Users\Omyga\source\repos\Easy Language Changer\obj\Debug\Easy Language Changer.pdb
