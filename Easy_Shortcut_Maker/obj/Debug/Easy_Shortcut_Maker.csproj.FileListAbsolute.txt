@@ -1,0 +1,10 @@
+C:\Users\Omyga\source\repos\Easy_Shortcut_Maker\obj\Debug\Easy_Shortcut_Maker.csproj.AssemblyReference.cache
+C:\Users\Omyga\source\repos\Easy_Shortcut_Maker\obj\Debug\Easy_Shortcut_Maker.Properties.Resources.resources
+C:\Users\Omyga\source\repos\Easy_Shortcut_Maker\obj\Debug\Easy_Shortcut_Maker.csproj.GenerateResource.cache
+C:\Users\Omyga\source\repos\Easy_Shortcut_Maker\obj\Debug\Easy_Shortcut_Maker.csproj.CoreCompileInputs.cache
+C:\Users\Omyga\source\repos\Easy_Shortcut_Maker\bin\Debug\Easy_Shortcut_Maker.exe.config
+C:\Users\Omyga\source\repos\Easy_Shortcut_Maker\bin\Debug\Easy_Shortcut_Maker.exe
+C:\Users\Omyga\source\repos\Easy_Shortcut_Maker\bin\Debug\Easy_Shortcut_Maker.pdb
+C:\Users\Omyga\source\repos\Easy_Shortcut_Maker\obj\Debug\Easy_Shortcut_Maker.Form1.resources
+C:\Users\Omyga\source\repos\Easy_Shortcut_Maker\obj\Debug\Easy_Shortcut_Maker.exe
+C:\Users\Omyga\source\repos\Easy_Shortcut_Maker\obj\Debug\Easy_Shortcut_Maker.pdb
