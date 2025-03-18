@@ -44,7 +44,7 @@ class Program
 }}";
 
             CompileExecutable(code, shortcutExePath);
-            MessageBox.Show("Scorciatoia creata con successo!");
+            MessageBox.Show("Shortcut successfully created!");
         }
 
         private void CompileExecutable(string code, string outputPath)

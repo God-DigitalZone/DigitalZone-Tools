@@ -32,7 +32,7 @@
             this.btnGenerate.Name = "btnGenerate";
             this.btnGenerate.Size = new System.Drawing.Size(260, 23);
             this.btnGenerate.TabIndex = 1;
-            this.btnGenerate.Text = "Genera Scorciatoia";
+            this.btnGenerate.Text = "Generate Shortcut";
             this.btnGenerate.UseVisualStyleBackColor = true;
             this.btnGenerate.Click += new System.EventHandler(this.BtnGenerate_Click);
             // 
@@ -44,7 +44,7 @@
             this.Controls.Add(this.btnGenerate);
             this.Controls.Add(this.txtGamePath);
             this.Name = "Form1";
-            this.Text = "Generatore Scorciatoie";
+            this.Text = "Easy Shortcut Maker";
             this.ResumeLayout(false);
             this.PerformLayout();
         }
