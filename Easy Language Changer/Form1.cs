@@ -30,27 +30,27 @@ namespace Easy_Language_Changer
         public Form1()
         {
             InitializeComponent();
-            this.Text = "Easy Language Changer"; // Cambia il titolo del form
+            this.Text = "Easy Language Changer"; // Change the title of the form
             ApplyDarkMode();
             LoadSupportedLanguages();
             CreateUI();
 
-            // Chiamata al metodo Resize per forzare il centraggio degli elementi
+            // Call to Resize method to force centering of elements
             this.OnResize(EventArgs.Empty);
 
-            // Imposta la lingua predefinita dopo che tutti i controlli sono stati aggiunti
+            // Set the default language after all controls have been added
             this.Load += (sender, e) => SetDefaultLanguage();
         }
 
         private void ApplyDarkMode()
         {
-            this.BackColor = Color.FromArgb(45, 45, 48); // Sfondo scuro
-            this.ForeColor = Color.White; // Testo bianco
+            this.BackColor = Color.FromArgb(45, 45, 48); // Dark background
+            this.ForeColor = Color.White; // White background
 
             foreach (Control ctrl in this.Controls)
             {
-                ctrl.BackColor = Color.FromArgb(45, 45, 48); // Sfondo scuro per i controlli
-                ctrl.ForeColor = Color.White; // Testo bianco per i controlli
+                ctrl.BackColor = Color.FromArgb(45, 45, 48); // Dark background for controls
+                ctrl.ForeColor = Color.White; // White text for controls
             }
         }
 
@@ -145,28 +145,28 @@ namespace Easy_Language_Changer
             var applyButton = new Button { Text = "Apply Language" };
             messageLabel = new Label { Text = "", Font = new Font("Arial", 10, FontStyle.Italic), AutoSize = true };
 
-            // Aggiungi la scritta "Powered by DigitalZone" sotto il messaggio
+            // Add the words “Powered by DigitalZone” below the message
             poweredByLabel = new Label
             {
                 Text = "Powered by DigitalZone",
-                Font = new Font("Arial", 14, FontStyle.Bold), // Stesso font di "Select Game Language"
+                Font = new Font("Arial", 14, FontStyle.Bold), // Same Font of "Select Game Language"
                 ForeColor = Color.White,
                 AutoSize = true
             };
 
-            // Aggiungi un'icona GitHub cliccabile
+            // Add a clickable GitHub icon
             var githubIcon = new PictureBox
             {
-                Image = Properties.Resources.github, // Utilizza l'immagine incorporata
+                Image = Properties.Resources.github, // Use the embedded image
                 Width = 32,
                 Height = 32,
                 Left = (this.ClientSize.Width - 32) / 2,
                 Top = 300,
                 Cursor = Cursors.Hand
             };
-            githubIcon.Click += (sender, e) => System.Diagnostics.Process.Start("https://github.com/God-DigitalZone/Easy_Language_Changer-Easy_Overlay_Settings");
+            githubIcon.Click += (sender, e) => System.Diagnostics.Process.Start("https://github.com/God-DigitalZone/DigitalZone-Tools");
 
-            // Aggiungi un'etichetta per "GitHub"
+            // Add a label for “GitHub”
             var githubLabel = new Label
             {
                 Text = "GitHub",
@@ -188,7 +188,7 @@ namespace Easy_Language_Changer
             comboBox.Top = 100;
             applyButton.Top = 150;
             messageLabel.Top = 200;
-            poweredByLabel.Top = 220; // Posiziona la scritta sotto il messaggio
+            poweredByLabel.Top = 220; // Place the inscription below the message
 
             applyButton.Click += (sender, e) => UpdateLanguage(comboBox.SelectedItem.ToString());
 
@@ -200,7 +200,7 @@ namespace Easy_Language_Changer
             this.Controls.Add(githubIcon);
             this.Controls.Add(githubLabel);
 
-            // Centrare gli elementi al ridimensionamento
+            // Centering elements at resizing
             this.Resize += (sender, e) =>
             {
                 label.Left = (this.ClientSize.Width - label.Width) / 2;
