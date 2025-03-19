@@ -19,26 +19,26 @@ namespace Easy_Overlay_Settings
         public Form1()
         {
             InitializeComponent();
-            this.Text = "Easy Overlay Settings"; // Cambia il titolo del form
+            this.Text = "Easy Overlay Settings"; // Change the title of the form
             ApplyDarkMode();
             CreateUI();
 
-            // Chiamata al metodo Resize per forzare il centraggio degli elementi
+            // Call to Resize method to force centering of elements
             this.OnResize(EventArgs.Empty);
 
-            // Carica il valore attuale del config dell'overlay
+            // Load the current value of the overlay config.
             this.Load += (sender, e) => LoadOverlayConfig();
         }
 
         private void ApplyDarkMode()
         {
-            this.BackColor = Color.FromArgb(45, 45, 48); // Sfondo scuro
-            this.ForeColor = Color.White; // Testo bianco
+            this.BackColor = Color.FromArgb(45, 45, 48); // Dark background
+            this.ForeColor = Color.White; // White background
 
             foreach (Control ctrl in this.Controls)
             {
-                ctrl.BackColor = Color.FromArgb(45, 45, 48); // Sfondo scuro per i controlli
-                ctrl.ForeColor = Color.White; // Testo bianco per i controlli
+                ctrl.BackColor = Color.FromArgb(45, 45, 48); // Dark background for controls
+                ctrl.ForeColor = Color.White; // White text for controls
             }
         }
 
@@ -75,7 +75,7 @@ namespace Easy_Overlay_Settings
                 messageLabel.ForeColor = Color.Red;
             }
 
-            // Centra il messaggio
+            // Center the message
             messageLabel.Left = (this.ClientSize.Width - messageLabel.Width) / 2;
             poweredByLabel.Left = (this.ClientSize.Width - poweredByLabel.Width) / 2;
             githubPictureBox.Left = (this.ClientSize.Width - githubPictureBox.Width) / 2;
@@ -107,28 +107,28 @@ namespace Easy_Overlay_Settings
             overlayCheckBox = new CheckBox { Text = "Enable Overlay", AutoSize = true, ForeColor = Color.White };
             messageLabel = new Label { Text = "", Font = new Font("Arial", 10, FontStyle.Italic), AutoSize = true };
 
-            // Aggiungi la scritta "Powered by DigitalZone" sotto il messaggio
+            // Add the text "Powered by DigitalZone" below the message
             poweredByLabel = new Label
             {
                 Text = "Powered by DigitalZone",
-                Font = new Font("Arial", 14, FontStyle.Bold), // Stesso font di "Enable Overlay"
+                Font = new Font("Arial", 14, FontStyle.Bold), // Same Font of "Enable Overlay"
                 ForeColor = Color.White,
                 AutoSize = true
             };
 
-            // Carica l'immagine di GitHub dalle risorse incorporate
+            // Upload GitHub image from embedded resources
             githubPictureBox = new PictureBox
             {
-                Image = Easy_Overlay_Settings.Properties.Resources.github, // Usa il nome del namespace completo
+                Image = Easy_Overlay_Settings.Properties.Resources.github, // Use the full namespace name
                 SizeMode = PictureBoxSizeMode.AutoSize,
-                Cursor = Cursors.Hand // Imposta il cursore a mano quando passa sopra l'icona
+                Cursor = Cursors.Hand // Sets the hand cursor when it passes over the icon
             };
-            githubPictureBox.Click += (sender, e) => Process.Start("https://github.com/God-DigitalZone/Easy_Language_Changer-Easy_Overlay_Settings");
+            githubPictureBox.Click += (sender, e) => Process.Start("https://github.com/God-DigitalZone/DigitalZone-Tools");
 
             githubLabel = new Label
             {
                 Text = "GitHub",
-                Font = new Font("Arial", 14, FontStyle.Bold), // Stesso font di "Powered by DigitalZone"
+                Font = new Font("Arial", 14, FontStyle.Bold), // Same Font of "Powered by DigitalZone"
                 ForeColor = Color.White,
                 AutoSize = true
             };
@@ -142,7 +142,7 @@ namespace Easy_Overlay_Settings
             messageLabel.Top = 100;
             poweredByLabel.Top = 120;
 
-            // Posiziona l'icona di GitHub e l'etichetta sotto il "Powered by DigitalZone"
+            // Place the GitHub icon and label under the "Powered by DigitalZone"
             githubPictureBox.Top = poweredByLabel.Bottom + 10;
             githubPictureBox.Left = (this.ClientSize.Width - githubPictureBox.Width) / 2;
             githubLabel.Top = githubPictureBox.Bottom + 5;
@@ -153,10 +153,10 @@ namespace Easy_Overlay_Settings
             this.Controls.Add(overlayCheckBox);
             this.Controls.Add(messageLabel);
             this.Controls.Add(poweredByLabel);
-            this.Controls.Add(githubPictureBox); // Aggiungi l'icona di GitHub
-            this.Controls.Add(githubLabel); // Aggiungi l'etichetta di GitHub
+            this.Controls.Add(githubPictureBox); // Add GitHub icon
+            this.Controls.Add(githubLabel); // Add GitHub label
 
-            // Centrare gli elementi al ridimensionamento
+            // Centering elements at resizing
             this.Resize += (sender, e) => {
                 overlayCheckBox.Left = (this.ClientSize.Width - overlayCheckBox.Width) / 2;
                 messageLabel.Left = (this.ClientSize.Width - messageLabel.Width) / 2;
@@ -168,7 +168,7 @@ namespace Easy_Overlay_Settings
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            // Aggiungi il codice che deve essere eseguito quando il form viene caricato
+            // Add the code that should be executed when the form is loaded
         }
     }
 }
