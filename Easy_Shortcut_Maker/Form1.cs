@@ -4,50 +4,117 @@ using System.Windows.Forms;
 using Microsoft.CSharp;
 using System.CodeDom.Compiler;
 using System.Diagnostics;
+using System.Drawing;
 
 namespace Easy_Shortcut_Maker
 {
     public partial class Form1 : Form
     {
-        private bool isDarkMode = true; // Dark Mode on by default
+        private bool isDarkMode = true; // Dark Mode attivo di default
 
         public Form1()
         {
             InitializeComponent();
-            ApplyDarkMode(isDarkMode); // Applies Dark Mode at Startup
+            ApplyDarkMode(isDarkMode);
+        }
+
+        private string GetRelativePath(string fullPath, string basePath)
+        {
+            if (!basePath.EndsWith(Path.DirectorySeparatorChar.ToString()))
+                basePath += Path.DirectorySeparatorChar;
+
+            Uri fullUri = new Uri(fullPath);
+            Uri baseUri = new Uri(basePath);
+
+            Uri relativeUri = baseUri.MakeRelativeUri(fullUri);
+            string relativePath = Uri.UnescapeDataString(relativeUri.ToString())
+                .Replace('/', Path.DirectorySeparatorChar);
+
+            if (!relativePath.StartsWith("."))
+                relativePath = ".\\" + relativePath;
+
+            return relativePath;
         }
 
         private void BtnGenerate_Click(object sender, EventArgs e)
         {
-            string gamePath = txtGamePath.Text;
+            string gamePath = txtGamePath.Text.Trim();
             if (string.IsNullOrEmpty(gamePath))
             {
-                MessageBox.Show("Enter the path of the game.");
+                MessageBox.Show("Please enter the game path.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (!File.Exists(gamePath))
+            {
+                MessageBox.Show("Game executable not found at the specified path.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             string shortcutExePath = Path.Combine(Application.StartupPath, "GameLauncher.exe");
-            if (File.Exists(shortcutExePath))
+
+            try
             {
-                File.Delete(shortcutExePath); // Overrides if it already exists
-            }
+                if (File.Exists(shortcutExePath))
+                    File.Delete(shortcutExePath);
 
-            string arguments = txtArguments.Text;
+                string arguments = txtArguments.Text;
+                string relativePath = GetRelativePath(gamePath, Application.StartupPath);
 
-            string code = $@"
-using System;
+                // Codice generato con escaping corretto
+                string code = @"using System;
 using System.Diagnostics;
+using System.IO;
+using System.Windows.Forms;
 
 class Program
-{{
+{
     static void Main()
-    {{
-        Process.Start(@""{gamePath.Replace(@"\", @"\\")}"", @""{arguments.Replace("\"", "\"\"")}"");
-    }}
-}}";
+    {
+        try
+        {
+            string exePath = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), " +
+                        $"@\"{relativePath.Replace("\\", "\\\\")}\");" + @"
+            
+            if (!File.Exists(exePath))
+            {
+                MessageBox.Show(@""Game not found at: "" + exePath + ""\nPlease place the shortcut in the correct folder."", 
+                              ""Error"", 
+                              MessageBoxButtons.OK, 
+                              MessageBoxIcon.Error);
+                return;
+            }
 
-            CompileExecutable(code, shortcutExePath);
-            MessageBox.Show("Shortcut successfully created!");
+            ProcessStartInfo startInfo = new ProcessStartInfo
+            {
+                FileName = exePath,
+                Arguments = " + $"@\"{arguments.Replace("\"", "\"\"")}\"," + @"
+                WorkingDirectory = Path.GetDirectoryName(exePath),
+                UseShellExecute = true
+            };
+
+            Process.Start(startInfo);
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(@""Error launching game: "" + ex.Message + ""\nMake sure the game files are in the correct location."", 
+                          ""Error"", 
+                          MessageBoxButtons.OK, 
+                          MessageBoxIcon.Error);
+        }
+    }
+}";
+
+                CompileExecutable(code, shortcutExePath);
+                MessageBox.Show($"Shortcut created successfully!\n\nIt will look for the game at:\n{relativePath}",
+                    "Success",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error creating shortcut: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void CompileExecutable(string code, string outputPath)
@@ -58,77 +125,73 @@ class Program
                 {
                     GenerateExecutable = true,
                     OutputAssembly = outputPath,
-                    ReferencedAssemblies = { "System.dll" }
+                    ReferencedAssemblies = {
+                        "System.dll",
+                        "System.Windows.Forms.dll"
+                    },
+                    CompilerOptions = "/optimize"
                 };
 
                 CompilerResults results = provider.CompileAssemblyFromSource(parameters, code);
+
                 if (results.Errors.HasErrors)
                 {
-                    string errors = "Compilation errors:\n";
+                    string errorMessage = "Compilation failed:\n";
                     foreach (CompilerError error in results.Errors)
-                    {
-                        errors += $"- Line {error.Line}: {error.ErrorText}\n";
-                    }
-                    MessageBox.Show(errors);
+                        errorMessage += $"- Line {error.Line}: {error.ErrorText}\n";
+
+                    MessageBox.Show(errorMessage, "Compilation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
 
-        private void ToggleDarkMode()
-        {
-            isDarkMode = !isDarkMode; // Reverse the state of Dark Mode
-            ApplyDarkMode(isDarkMode); // Apply Theme
-        }
-
         private void ApplyDarkMode(bool darkMode)
         {
-            if (darkMode)
+            Color backColor = darkMode ? Color.FromArgb(30, 30, 30) : SystemColors.Control;
+            Color foreColor = darkMode ? Color.White : SystemColors.ControlText;
+            Color controlBackColor = darkMode ? Color.FromArgb(50, 50, 50) : SystemColors.Window;
+            Color buttonBackColor = darkMode ? Color.FromArgb(70, 70, 70) : SystemColors.Control;
+
+            this.BackColor = backColor;
+            this.ForeColor = foreColor;
+
+            foreach (Control control in Controls)
             {
-                // Colors for Dark Mode
-                this.BackColor = System.Drawing.Color.FromArgb(30, 30, 30);
-                this.ForeColor = System.Drawing.Color.White;
-
-                txtGamePath.BackColor = System.Drawing.Color.FromArgb(50, 50, 50);
-                txtGamePath.ForeColor = System.Drawing.Color.White;
-
-                txtArguments.BackColor = System.Drawing.Color.FromArgb(50, 50, 50);
-                txtArguments.ForeColor = System.Drawing.Color.White;
-
-                btnGenerate.BackColor = System.Drawing.Color.FromArgb(70, 70, 70);
-                btnGenerate.ForeColor = System.Drawing.Color.White;
-
-                label1.ForeColor = System.Drawing.Color.White;
-                label2.ForeColor = System.Drawing.Color.White;
-
-                btnToggleDarkMode.BackColor = System.Drawing.Color.FromArgb(70, 70, 70);
-                btnToggleDarkMode.ForeColor = System.Drawing.Color.White;
-            }
-            else
-            {
-                // Colors for Light Mode
-                this.BackColor = System.Drawing.SystemColors.Control;
-                this.ForeColor = System.Drawing.SystemColors.ControlText;
-
-                txtGamePath.BackColor = System.Drawing.SystemColors.Window;
-                txtGamePath.ForeColor = System.Drawing.SystemColors.WindowText;
-
-                txtArguments.BackColor = System.Drawing.SystemColors.Window;
-                txtArguments.ForeColor = System.Drawing.SystemColors.WindowText;
-
-                btnGenerate.BackColor = System.Drawing.SystemColors.Control;
-                btnGenerate.ForeColor = System.Drawing.SystemColors.ControlText;
-
-                label1.ForeColor = System.Drawing.SystemColors.ControlText;
-                label2.ForeColor = System.Drawing.SystemColors.ControlText;
-
-                btnToggleDarkMode.BackColor = System.Drawing.SystemColors.Control;
-                btnToggleDarkMode.ForeColor = System.Drawing.SystemColors.ControlText;
+                if (control is TextBox textBox)
+                {
+                    textBox.BackColor = controlBackColor;
+                    textBox.ForeColor = foreColor;
+                    textBox.BorderStyle = darkMode ? BorderStyle.FixedSingle : BorderStyle.Fixed3D;
+                }
+                else if (control is Button button)
+                {
+                    button.BackColor = buttonBackColor;
+                    button.ForeColor = foreColor;
+                    button.FlatStyle = darkMode ? FlatStyle.Flat : FlatStyle.Standard;
+                }
+                else if (control is Label label)
+                {
+                    label.ForeColor = foreColor;
+                }
             }
         }
 
         private void BtnToggleDarkMode_Click(object sender, EventArgs e)
         {
-            ToggleDarkMode();
+            isDarkMode = !isDarkMode;
+            ApplyDarkMode(isDarkMode);
+        }
+
+        private void BtnBrowseGame_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Filter = "Executable Files (*.exe)|*.exe|All Files (*.*)|*.*";
+                openFileDialog.Title = "Select Game Executable";
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                    txtGamePath.Text = openFileDialog.FileName;
+            }
         }
     }
 }
